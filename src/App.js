@@ -4,7 +4,7 @@ import Header from "./util/Header";
 import HomePage from "./pages/HomePage";
 import ProjectPage from "./pages/ProjectsPage";
 import LoginPage from "./pages/LoginPage";
-import DashboardPage from "./pages/DashboardPage";
+import CodeDashboardPage from "./pages/CodeDashboardPage";
 import CodeNowPage from "./pages/CodeNowPage";
 import AssessmentPage from "./pages/AssesmentPage";
 import MainDash from "./pages/MainDash"
@@ -19,7 +19,7 @@ function App() {
         <Route path="/home" element={<HomePage />} />
         <Route path="/projects" element={<ProjectPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/dashboard" element={<DashboardPage />} />
+        <Route path="/dashboard" element={<CodeDashboardPage />} />
         <Route path="/codenow/:id" element={<CodeNowPage />} />
         <Route path="/assesment" element={<AssessmentPage />} />
         <Route path="/main" element={<MainDash />} />

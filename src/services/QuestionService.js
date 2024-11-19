@@ -5,6 +5,7 @@ import axios from "axios";
 const API_URL = "http://localhost:8080"; // Replace with your backend URL
 
 const getQuestions = async (level) => {
+  console.log("trying to get");
   try {
     const response = await axios.get(`${API_URL}/ques/list`, {
       headers: {

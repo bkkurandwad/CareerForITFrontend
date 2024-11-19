@@ -28,17 +28,17 @@ function Header() {
             marginTop: "-10px",
           }}
         >
-          <Link to="/home" className="linkobj">
+          <Link to="/main" className="linkobj">
             Home
           </Link>
           <Link to="/projects" className="linkobj">
-            Projects
+            Resume
+          </Link>
+          <Link to="/dashboard" className="linkobj">
+            Code
           </Link>
           <Link to="/" className="linkobj">
-            Achievements
-          </Link>
-          <Link to="/" className="linkobj">
-            About Us
+            Interview
           </Link>
           <Link to="/" className="linkobj">
             Contact Us

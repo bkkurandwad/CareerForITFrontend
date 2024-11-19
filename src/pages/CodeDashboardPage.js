@@ -3,7 +3,7 @@ import getQuestions from "../services/QuestionService"; // Import the getQuestio
 import "../stylesheets/dashboard-page.css"; // Assuming CSS is set up for styling the cards
 import { useNavigate } from "react-router-dom";
 
-const DashboardPage = () => {
+const CodeDashboardPage = () => {
   const navigate = useNavigate();
   const [questions, setQuestions] = useState([]); // State to store questions
   const [loading, setLoading] = useState(true); // State to track loading status
@@ -12,6 +12,7 @@ const DashboardPage = () => {
   // Fetch questions when the component mounts
 
   const fetchQuestions = async (level) => {
+    console.log('i m fetching');
     try {
       const data = await getQuestions(level); // Fetch questions using the service
       setQuestions(data); // Set questions data in state
@@ -81,4 +82,4 @@ const DashboardPage = () => {
   );
 };
 
-export default DashboardPage;
+export default CodeDashboardPage;
