@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import getQuestions from "../services/QuestionService"; // Import the getQuestions function
+import QuestionService from "../services/QuestionService"; // Import the getQuestions function
 import "../stylesheets/dashboard-page.css"; // Assuming CSS is set up for styling the cards
 import { useNavigate } from "react-router-dom";
 
@@ -14,7 +14,7 @@ const CodeDashboardPage = () => {
   const fetchQuestions = async (level) => {
     console.log('i m fetching');
     try {
-      const data = await getQuestions(level); // Fetch questions using the service
+      const data = await QuestionService.getQuestions(level); // Fetch questions using the service
       setQuestions(data); // Set questions data in state
       console.log(data);
     } catch (error) {
