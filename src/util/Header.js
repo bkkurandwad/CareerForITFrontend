@@ -10,6 +10,10 @@ function Header() {
     navigate("/login");
   };
 
+  const handleSignupClick = () => {
+    navigate("/signup");
+  };
+
   return (
     <header className="global-header">
       <div style={{ display: "flex", gap: "10px" }}>
@@ -47,7 +51,7 @@ function Header() {
             <button className="btn" onClick={handleLoginClick}>
               Login
             </button>
-            <button className="btn">Sign Up</button>
+            <button className="btn" onClick={handleSignupClick}>Sign Up</button>
           </div>
           <div />
         </div>

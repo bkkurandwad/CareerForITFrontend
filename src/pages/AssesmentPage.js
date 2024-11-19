@@ -41,7 +41,7 @@ const AssessmentPage = () => {
 
   return (
     <div className="assessment-container">
-      {/* Sidebar */}
+      {/* Sidebar with question navigation */}
       <div className="sidebar">
         {questions.map((_, index) => (
           <div
@@ -54,34 +54,36 @@ const AssessmentPage = () => {
         ))}
       </div>
 
-      {/* Main Question Area */}
-      <div className="question-area">
-        <h2>Question {currentQuestion + 1}</h2>
-        <p>{questions[currentQuestion].question}</p>
-        <form>
-          {questions[currentQuestion].options.map((option, index) => (
-            <div key={index}>
-              <label>
-                <input
-                  type="radio"
-                  name="option"
-                  value={index}
-                  checked={answers[currentQuestion] === index}
-                  onChange={() => handleOptionChange(index)}
-                />
-                {option}
-              </label>
-            </div>
-          ))}
-        </form>
-        <button onClick={handleDeselect} disabled={answers[currentQuestion] === null}>
-          Deselect
-        </button>
-        {currentQuestion < questions.length - 1 ? (
-          <button onClick={handleNext}>Next Question</button>
-        ) : (
-          <button onClick={handleSubmit}>Submit</button>
-        )}
+      {/* Main Content (Card centered with question) */}
+      <div className="card-container">
+        <div className="question-area">
+          <h2>Question {currentQuestion + 1}</h2>
+          <p>{questions[currentQuestion].question}</p>
+          <form>
+            {questions[currentQuestion].options.map((option, index) => (
+              <div key={index}>
+                <label>
+                  <input
+                    type="radio"
+                    name="option"
+                    value={index}
+                    checked={answers[currentQuestion] === index}
+                    onChange={() => handleOptionChange(index)}
+                  />
+                  {option}
+                </label>
+              </div>
+            ))}
+          </form>
+          <button onClick={handleDeselect} disabled={answers[currentQuestion] === null}>
+            Deselect
+          </button>
+          {currentQuestion < questions.length - 1 ? (
+            <button onClick={handleNext}>Next Question</button>
+          ) : (
+            <button onClick={handleSubmit}>Submit</button>
+          )}
+        </div>
       </div>
     </div>
   );

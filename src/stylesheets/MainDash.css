@@ -1,50 +1,81 @@
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
-  }
-  
-  .dashboard-container {
-    text-align: center;
+/* MainDash.css */
+.dashboard-container {
     padding: 20px;
+    text-align: center;
   }
   
   h1 {
-    margin-bottom: 30px;
-    font-size: 2.5em;
-    color: #333;
+    font-size: 2.5rem;
+    margin-bottom: 10px;
   }
   
-  .dashboard-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-    padding: 20px;
-  }
-  
-  .dashboard-card {
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    text-align: left;
-    cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-  
-  .dashboard-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-  }
-  
-  .dashboard-card h2 {
-    margin: 0 0 10px;
-    font-size: 1.5em;
-    color: #007bff;
-  }
-  
-  .dashboard-card p {
-    margin: 0;
+  .step-description {
+    font-size: 1.2rem;
+    margin-bottom: 40px;
     color: #555;
+  }
+  
+  .step-by-step-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Adjust for responsive design */
+    gap: 30px;
+    margin: 0 auto;
+    max-width: 1200px;
+  }
+  
+  .step {
+    display: flex;
+    align-items: center;
+    background-color: #f9f9f9;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .step:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .step-number {
+    background-color: #4CAF50;
+    color: white;
+    font-size: 1.5rem;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    margin-right: 20px;
+  }
+  
+  .step-content {
+    flex-grow: 1;
+  }
+  
+  .step-content h2 {
+    font-size: 1.4rem;
+    margin: 0;
+  }
+  
+  .step-content p {
+    font-size: 1rem;
+    margin-top: 5px;
+    color: #666;
+  }
+  
+  @media (max-width: 768px) {
+    .step-by-step-container {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .step-by-step-container {
+      grid-template-columns: 1fr;
+    }
   }
   
