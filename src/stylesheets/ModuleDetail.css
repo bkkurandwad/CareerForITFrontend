@@ -1,0 +1,49 @@
+/* ModuleDetail.css */
+.module-detail-container {
+    padding: 20px;
+    text-align: left;
+    background-color: #f9f9f9;
+  }
+  
+  .module-detail-container h1 {
+    font-size: 2.5em;
+    color: #007bff;
+  }
+  
+  .module-detail-container p {
+    font-size: 1.2em;
+    color: #555;
+    margin: 10px 0;
+  }
+  
+  .module-detail-container h2 {
+    font-size: 1.8em;
+    margin-top: 20px;
+  }
+  
+  .module-detail-container ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .module-detail-container li {
+    padding: 10px 0;
+    font-size: 1.1em;
+  }
+  
+  .next-button {
+    padding: 10px 20px;
+    font-size: 1em;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.2s;
+  }
+  
+  .next-button:hover {
+    background-color: #0056b3;
+  }
+  

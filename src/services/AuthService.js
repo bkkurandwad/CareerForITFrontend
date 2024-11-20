@@ -17,4 +17,20 @@ const login = async (username, password) => {
   }
 };
 
-export default login;
+const register = async (username, password, name, number, mail) => {
+  try {
+    const response = await axios.post("http://localhost:8080/reg/student", {
+      username: username,
+      password: password,
+      name: name,
+      number: number,
+      mail: mail,
+    });
+    return response.data; // Assuming the backend returns user data or token
+  } catch (error) {
+    console.error("Reg failed", error);
+    throw error; // Forward error to handle it in the component
+  }
+};
+
+export default { login, register };

@@ -10,6 +10,10 @@ function Header() {
     navigate("/login");
   };
 
+  const handleSignupClick = () => {
+    navigate("/signup");
+  };
+
   return (
     <header className="global-header">
       <div style={{ display: "flex", gap: "10px" }}>
@@ -28,17 +32,17 @@ function Header() {
             marginTop: "-10px",
           }}
         >
-          <Link to="/home" className="linkobj">
+          <Link to="/main" className="linkobj">
             Home
           </Link>
           <Link to="/projects" className="linkobj">
-            Projects
+            Resume
+          </Link>
+          <Link to="/dashboard" className="linkobj">
+            Code
           </Link>
           <Link to="/" className="linkobj">
-            Achievements
-          </Link>
-          <Link to="/" className="linkobj">
-            About Us
+            Interview
           </Link>
           <Link to="/" className="linkobj">
             Contact Us
@@ -47,7 +51,7 @@ function Header() {
             <button className="btn" onClick={handleLoginClick}>
               Login
             </button>
-            <button className="btn">Sign Up</button>
+            <button className="btn" onClick={handleSignupClick}>Sign Up</button>
           </div>
           <div />
         </div>

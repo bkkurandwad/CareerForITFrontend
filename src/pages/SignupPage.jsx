@@ -1,42 +1,45 @@
 import React, { useState } from "react";
-import "../stylesheets/LoginPage.css";
-import login from "../services/AuthService";
+import "../stylesheets/SignupPage.css";
+import register from "../services/AuthService"; // Assuming a signup service exists
 import Cookies from "js-cookie";
 import { Navigate, useNavigate } from "react-router-dom";
 
-function LoginPage() {
+function SignupPage() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [redirect, setRedirect] = useState(false);
+
   const navigate = useNavigate();
 
-  const handleLogin = async (event) => {
+  const handleSignup = async (event) => {
     event.preventDefault();
-    console.log("button clicked");
     try {
-      const userData = await login(username, password);
-      console.log("Login successful:", userData);
+      const userData = await register(name, email, phoneNumber, username, password);
+      console.log("Signup successful:", userData);
       setError("");
 
-      // Store the JWT in a cookie
-      const token = userData; // Assuming userData contains the JWT
-      Cookies.set("token", token, { expires: 1 }); // Expires in 1 day
+      // Store the JWT in a cookie (assuming userData contains a token)
+      Cookies.set("token", userData.token, { expires: 1 }); // Token expires in 1 day
 
-      // Trigger a redirect to the dashboard
+      // Redirect to dashboard after successful signup
       setRedirect(true);
     } catch (err) {
-      setError("Login failed. Please check your credentials.");
+      console.error("Signup failed:", err);
+      setError("Signup failed. Please check your details and try again.");
     }
   };
 
   if (redirect) {
-    return <Navigate to="/dashboard" />;
+    return <Navigate to="/main" />;
   }
 
   return (
     <div
-      className="login-page"
+      className="signup-page"
       style={{
         display: "flex",
         justifyContent: "center",
@@ -57,9 +60,9 @@ function LoginPage() {
           backgroundColor: "white",
         }}
       >
-        <h1 className="heading" style={{ marginBottom: "20px" }}>Login</h1>
+        <h1 className="heading" style={{ marginBottom: "20px" }}>Sign Up</h1>
         <form
-          onSubmit={handleLogin}
+          onSubmit={handleSignup}
           style={{
             display: "flex",
             flexDirection: "column",
@@ -67,6 +70,36 @@ function LoginPage() {
             gap: "10px",
           }}
         >
+          <label>Name:</label>
+          <input
+            type="text"
+            name="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+            style={{ height: "25px", width: "200px" }}
+          />
+
+          <label>Email:</label>
+          <input
+            type="email"
+            name="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            style={{ height: "25px", width: "200px" }}
+          />
+
+          <label>Phone Number:</label>
+          <input
+            type="number"
+            name="phoneNumber"
+            value={phoneNumber}
+            onChange={(e) => setPhoneNumber(e.target.value)}
+            required
+            style={{ height: "25px", width: "200px" }}
+          />
+
           <label>Username:</label>
           <input
             type="text"
@@ -76,6 +109,7 @@ function LoginPage() {
             required
             style={{ height: "25px", width: "200px" }}
           />
+
           <label>Password:</label>
           <input
             type="password"
@@ -85,6 +119,7 @@ function LoginPage() {
             required
             style={{ height: "25px", width: "200px" }}
           />
+
           <button
             type="submit"
             style={{
@@ -96,8 +131,9 @@ function LoginPage() {
               marginTop: "20px",
             }}
           >
-            Login
+            Sign Up
           </button>
+
           {error && (
             <p style={{ color: "red", marginTop: "10px" }}>{error}</p>
           )}
@@ -107,4 +143,4 @@ function LoginPage() {
   );
 }
 
-export default LoginPage;
+export default SignupPage;

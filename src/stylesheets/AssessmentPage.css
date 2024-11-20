@@ -1,0 +1,79 @@
+/* General container for assessment */
+.assessment-container {
+    display: flex;
+    height: 600px;
+    width: 100%;
+    font-family: Arial, sans-serif; /* Use a more readable font */
+  }
+  
+  /* Sidebar styling */
+  .sidebar {
+    width: 250px; /* Increased width for better spacing */
+    height: 100%;
+    background-color: #f4f4f4;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+    box-sizing: border-box;
+    border-right: 2px solid #ddd; /* Adding a subtle border for separation */
+  }
+  
+  /* Styling for question boxes */
+  .question-box {
+    width: 40px; /* Made the box bigger */
+    height: 40px; /* Made the box bigger */
+    margin: 10px 5px; /* Increased margin for better spacing */
+    background-color: gray;
+    text-align: center;
+    line-height: 40px; /* Centered text vertically */
+    font-size: 16px; /* Increased font size */
+    color: white;
+    cursor: pointer;
+    border-radius: 6px; /* Slightly more rounded corners */
+    transition: background-color 0.3s ease; /* Smooth transition on hover */
+  }
+  
+  .question-box.attempted {
+    background-color: #28a745; /* Green for attempted questions */
+  }
+  
+  .question-box:hover {
+    background-color: #007bff; /* Hover effect */
+  }
+  
+  /* Styling for the question area */
+  .question-area {
+    flex: 1;
+    padding: 20px;
+    background-color: #fff;
+    border-left: 2px solid #ddd; /* Subtle border separating the question area */
+    overflow-y: auto; /* Allow scrolling if the content is too large */
+  }
+  
+  /* Button styling */
+  button {
+    margin: 10px;
+    padding: 10px 20px; /* Made the button larger */
+    font-size: 16px; /* Increased font size */
+    border: none;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    border-radius: 6px; /* Rounded corners */
+    transition: background-color 0.3s ease; /* Smooth transition on hover */
+  }
+  
+  button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  button:hover:not(:disabled) {
+    background-color: #0056b3; /* Darker blue on hover */
+  }
+  
+  /* Optional: Add hover effects for the sidebar */
+  .sidebar:hover {
+    background-color: #e9ecef; /* Subtle hover effect */
+  }
+  
