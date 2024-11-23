@@ -53,7 +53,7 @@ function Header() {
           <Link to="/dashboard" className="linkobj">
             Code
           </Link>
-          <Link to="/" className="linkobj">
+          <Link to="/interview" className="linkobj">
             Interview
           </Link>
           <Link to="/" className="linkobj">

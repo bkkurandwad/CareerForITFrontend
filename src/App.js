@@ -11,6 +11,7 @@ import MainDash from "./pages/MainDash"
 import LearnPage from "./pages/LearnPage";
 import ModuleDetail from "./pages/ModuleDetail";
 import SignupPage from "./pages/SignupPage";
+import InterviewPage from "./pages/InterviewPage";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <Route path="/main" element={<MainDash />} />
         <Route path="/learn" element={<LearnPage />} />
         <Route path="/learn/:moduleName" element={<ModuleDetail />} />
+        <Route path="/interview" element={<InterviewPage />} />
       </Routes>
       {/* </header>
       </div> */}

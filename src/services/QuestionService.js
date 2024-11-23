@@ -1,13 +1,12 @@
 // src/services/QuestionService.js
-
-import axios from "axios";
+import axiosInstance from "../interceptors/axiosInterceptor";
 
 const API_URL = "http://localhost:8080"; // Replace with your backend URL
 
 const getQuestions = async (level) => {
   console.log("trying to get");
   try {
-    const response = await axios.get(`${API_URL}/ques/list`, {
+    const response = await axiosInstance.get(`${API_URL}/ques/list`, {
       headers: {
         Level: level,
       },
@@ -21,7 +20,7 @@ const getQuestions = async (level) => {
 
 const getQuestion = async (id) => {
   try {
-    const response = await axios.get(`${API_URL}/ques/codenowques`, {
+    const response = await axiosInstance.get(`${API_URL}/ques/codenowques`, {
       headers: {
         id: id,
       },
@@ -36,7 +35,7 @@ const getQuestion = async (id) => {
 // New function to submit code for execution
 const runCode = async (id, code) => {
   try {
-    const response = await axios.post(`${API_URL}/code/compile`, {
+    const response = await axiosInstance.post(`${API_URL}/code/compile`, {
       id,
       code,
     });
