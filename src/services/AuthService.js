@@ -5,6 +5,7 @@ import axios from "axios";
 const API_URL = "http://localhost:8080"; // Replace with your backend URL
 
 const login = async (username, password) => {
+  console.log('trying to log');
   try {
     const response = await axios.post("http://localhost:8080/login/student", {
       username: username,

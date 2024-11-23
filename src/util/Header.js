@@ -2,6 +2,7 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../stylesheets/homepage.css";
 import logo from "../resources/logo.webp";
+import Cookies from "js-cookie";
 
 function Header() {
   const navigate = useNavigate();
@@ -14,6 +15,15 @@ function Header() {
     navigate("/signup");
   };
 
+  const handleLogoutClick = () => {
+    // Clear the 'Token' cookie on logout
+    Cookies.remove("Token");
+    console.log("Logged out successfully");
+    navigate("/login"); // Redirect to login page after logout
+  };
+
+  const token = Cookies.get("Token");
+
   return (
     <header className="global-header">
       <div style={{ display: "flex", gap: "10px" }}>
@@ -22,7 +32,9 @@ function Header() {
           style={{ display: "flex", justifyContent: "center" }}
           className="name"
         >
-          <h1 style={{ marginTop: "-30px", marginLeft: "-40px" }}>Career Crafter</h1>
+          <h1 style={{ marginTop: "-30px", marginLeft: "-40px" }}>
+            Career Crafter
+          </h1>
         </div>
         <div
           style={{
@@ -47,11 +59,22 @@ function Header() {
           <Link to="/" className="linkobj">
             Contact Us
           </Link>
+          {/* Conditional rendering for Login/Logout buttons */}
           <div style={{ display: "flex", gap: "12px", marginLeft: "40px" }}>
-            <button className="btn" onClick={handleLoginClick}>
-              Login
-            </button>
-            <button className="btn" onClick={handleSignupClick}>Sign Up</button>
+            {token ? (
+              <button className="btn" onClick={handleLogoutClick}>
+                Logout
+              </button>
+            ) : (
+              <>
+                <button className="btn" onClick={handleLoginClick}>
+                  Login
+                </button>
+                <button className="btn" onClick={handleSignupClick}>
+                  Sign Up
+                </button>
+              </>
+            )}
           </div>
           <div />
         </div>

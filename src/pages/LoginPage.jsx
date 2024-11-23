@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../stylesheets/LoginPage.css";
-import login from "../services/AuthService";
+import AuthService from "../services/AuthService";
 import Cookies from "js-cookie";
 import { Navigate, useNavigate } from "react-router-dom";
 
@@ -14,24 +14,34 @@ function LoginPage() {
   const handleLogin = async (event) => {
     event.preventDefault();
     console.log("button clicked");
+  
     try {
-      const userData = await login(username, password);
-      console.log("Login successful:", userData);
-      setError("");
-
-      // Store the JWT in a cookie
-      const token = userData; // Assuming userData contains the JWT
-      Cookies.set("token", token, { expires: 1 }); // Expires in 1 day
-
-      // Trigger a redirect to the dashboard
-      setRedirect(true);
+      const userData = await AuthService.login(username, password);
+      console.log("Login response:", userData);
+  
+      // Check if the response contains a valid token or success message
+      if (userData.message === "Login Successful") {
+        console.log("Login successful:", userData);
+        // Store the JWT in a cookie
+        const token = userData.accessToken; // Assuming userData contains the JWT in token field
+        const reftoken = userData.refreshToken;
+        Cookies.set("Token", token, { expires: 1 }); // Expires in 1 day
+        Cookies.set("RefreshToken", reftoken, { expires: 3});
+        // Trigger a redirect to the dashboard
+        setRedirect(true);
+      } else {
+        // If no valid token, display error
+        setError("Login failed. Please check your credentials.");
+      }
     } catch (err) {
+      console.error("Error during login:", err);
       setError("Login failed. Please check your credentials.");
     }
   };
+  
 
   if (redirect) {
-    return <Navigate to="/dashboard" />;
+    return <Navigate to="/main" />;
   }
 
   return (

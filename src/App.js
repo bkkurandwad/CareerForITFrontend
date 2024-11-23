@@ -17,6 +17,7 @@ function App() {
     <Router>
       <Header />
       <Routes>
+        <Route path="/" element={<MainDash />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/projects" element={<ProjectPage />} />
         <Route path="/login" element={<LoginPage />} />
