@@ -48,9 +48,7 @@ function Header() {
             Contact Us
           </Link>
           <div style={{ display: "flex", gap: "12px", marginLeft: "40px" }}>
-            <button className="btn" onClick={handleLoginClick}>
-              Login
-            </button>
+            
             <button className="btn" onClick={handleSignupClick}>Sign Up</button>
           </div>
           <div />
