@@ -2,6 +2,7 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../stylesheets/homepage.css";
 import logo from "../resources/logo.webp";
+import Cookies from "js-cookie";
 
 function Header() {
   const navigate = useNavigate();
@@ -13,6 +14,15 @@ function Header() {
   const handleSignupClick = () => {
     navigate("/signup");
   };
+
+  const handleLogoutClick = () => {
+    // Clear the 'Token' cookie on logout
+    Cookies.remove("Token");
+    console.log("Logged out successfully");
+    navigate("/login"); // Redirect to login page after logout
+  };
+
+  const token = Cookies.get("Token");
 
   return (
     <header className="global-header">
@@ -37,25 +47,34 @@ function Header() {
           <Link to="/main" className="linkobj">
             Home
           </Link>
-          <Link to="/projects" className="linkobj">
+          <Link to="/resume" className="linkobj">
             Resume
           </Link>
           <Link to="/dashboard" className="linkobj">
             Code
           </Link>
-          <Link to="/" className="linkobj">
+          <Link to="/interview" className="linkobj">
             Interview
           </Link>
-          <Link to="/" className="linkobj">
+          <Link to="/contact" className="linkobj">
             Contact Us
           </Link>
+          {/* Conditional rendering for Login/Logout buttons */}
           <div style={{ display: "flex", gap: "12px", marginLeft: "40px" }}>
-            <button className="btn" onClick={handleLoginClick}>
-              Login
-            </button>
-            <button className="btn" onClick={handleSignupClick}>
-              Sign Up
-            </button>
+            {token ? (
+              <button className="btn" onClick={handleLogoutClick}>
+                Logout
+              </button>
+            ) : (
+              <>
+                <button className="btn" onClick={handleLoginClick}>
+                  Login
+                </button>
+                <button className="btn" onClick={handleSignupClick}>
+                  Sign Up
+                </button>
+              </>
+            )}
           </div>
           <div />
         </div>

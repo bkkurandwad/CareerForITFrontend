@@ -1,12 +1,13 @@
 // src/apiService.js
 
-import axios from "axios";
+import axiosInstance from "../interceptors/axiosInterceptor";
 
 const API_URL = "http://localhost:8080"; // Replace with your backend URL
 
 const login = async (username, password) => {
+  console.log('trying to log');
   try {
-    const response = await axios.post("http://localhost:8080/login/student", {
+    const response = await axiosInstance.post(`${API_URL}/login/student`, {
       username: username,
       password: password,
     });
@@ -19,7 +20,7 @@ const login = async (username, password) => {
 
 const register = async (username, password, name, number, mail) => {
   try {
-    const response = await axios.post("http://localhost:8080/reg/student", {
+    const response = await axiosInstance.post(`${API_URL}/reg/student`, {
       username: username,
       password: password,
       name: name,
