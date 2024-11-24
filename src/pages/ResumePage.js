@@ -22,15 +22,30 @@ const ResumeForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const pdfBlob = await ResumeService.generateResume(formData);
-      const pdfURL = URL.createObjectURL(
-        new Blob([pdfBlob], { type: "application/pdf" })
-      );
-      window.open(pdfURL, "_blank");
+      // Call the API to generate the HTML resume
+      const response = await ResumeService.generateResume(formData);
+  
+      // Create a Blob for the HTML response
+      const htmlBlob = new Blob([response], { type: "text/html" });
+  
+      // Create a URL for the Blob
+      const htmlURL = URL.createObjectURL(htmlBlob);
+  
+      // Create a link to download the file as "resume.html"
+      const link = document.createElement("a");
+      link.href = htmlURL;
+      link.download = "resume.html";
+  
+      // Trigger the download
+      link.click();
+  
+      // Optionally open the file in a new tab
+      window.open(htmlURL, "_blank");
     } catch (error) {
       alert("Error generating resume!");
     }
   };
+  
 
   return (
     <form onSubmit={handleSubmit}>
