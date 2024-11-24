@@ -1,13 +1,17 @@
 import React, { useState, useRef, useEffect } from 'react';
+import '../stylesheets/InterviewPage.css';
 
 const InterviewPage = () => {
   const [isInterviewActive, setIsInterviewActive] = useState(false);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [transcription, setTranscription] = useState('');
+  const [isSpeaking, setIsSpeaking] = useState(false);
+  const [mouthScale, setMouthScale] = useState(1);
   const videoRef = useRef(null);
-  const streamRef = useRef(null);  // To hold the media stream
-  const recognitionRef = useRef(null); // To hold the speech recognition instance
-  const synthRef = useRef(null); // To hold speech synthesis instance
+  const streamRef = useRef(null);
+  const recognitionRef = useRef(null);
+  const silenceTimeoutRef = useRef(null);
+  const synthRef = useRef(null);
 
   // List of 10 software interview questions
   const questions = [
@@ -54,6 +58,10 @@ const InterviewPage = () => {
             transcript += event.results[i][0].transcript;
           }
           setTranscription(transcript); // Update transcription with the recognized speech
+
+          // Reset silence timer as user is speaking
+          clearTimeout(silenceTimeoutRef.current);
+          silenceTimeoutRef.current = setTimeout(proceedToNextQuestion, 3000); // Wait for 3 seconds of silence
         };
 
         recognition.onerror = (event) => {
@@ -81,7 +89,16 @@ const InterviewPage = () => {
     if ('speechSynthesis' in window) {
       const synth = window.speechSynthesis;
       const utterance = new SpeechSynthesisUtterance(question);
+      utterance.onend = () => {
+        console.log('Question asked: ', question); // Log the question being asked
+        setIsSpeaking(false);
+      };
+      setIsSpeaking(true);
       synth.speak(utterance);
+
+      // Animate the mouth when speaking
+      setMouthScale(1.2); // Enlarge the mouth when speaking
+      setTimeout(() => setMouthScale(1), 500); // Reset mouth scale after 500ms (duration of speech)
     } else {
       console.error('Speech synthesis is not supported in this browser.');
     }
@@ -90,7 +107,7 @@ const InterviewPage = () => {
   // Function to proceed to the next question after getting an answer
   const proceedToNextQuestion = () => {
     if (currentQuestionIndex < questions.length - 1) {
-      setCurrentQuestionIndex(currentQuestionIndex + 1); // Move to next question
+      setCurrentQuestionIndex((prevIndex) => prevIndex + 1); // Move to next question
       setTranscription(''); // Clear previous transcription
 
       // Speak the next question
@@ -126,28 +143,44 @@ const InterviewPage = () => {
       if (recognitionRef.current) {
         recognitionRef.current.stop();
       }
+      clearTimeout(silenceTimeoutRef.current); // Clean up the silence timeout
     };
   }, []);
 
   return (
-    <div className="interview">
+    <div className="interview-container">
       <h1>Interview</h1>
 
-      {/* Video element to display the webcam stream */}
-      <video ref={videoRef} autoPlay playsInline width="640" height="480" />
+      <div className="left-right-container">
+        {/* Left side: Avatar (or a person's picture) */}
+        <div className="avatar-container">
+          <div className="person-image">
+            <img src="/pics/lekh.jpg" alt="Person" className="person-avatar" />
+            {/* Sync the mouth movement */}
+            <div className="mouth" style={{ transform: `scaleY(${mouthScale})` }}></div>
+          </div>
+        </div>
+
+        {/* Right side: Webcam */}
+        <div className="video-container">
+          <video ref={videoRef} autoPlay playsInline className="webcam" />
+        </div>
+      </div>
 
       {/* Display transcribed text */}
-      <div>
+      <div className="transcription-container">
         <h3>Your Answer:</h3>
         <p>{transcription}</p>
       </div>
 
       {/* Start and End buttons */}
-      {!isInterviewActive ? (
-        <button onClick={startInterview}>Start Interview</button>
-      ) : (
-        <button onClick={endInterview}>End Interview</button>
-      )}
+      <div className="button-container">
+        {!isInterviewActive ? (
+          <button className="start-button" onClick={startInterview}>Start Interview</button>
+        ) : (
+          <button className="end-button" onClick={endInterview}>End Interview</button>
+        )}
+      </div>
     </div>
   );
 };

@@ -12,6 +12,8 @@ import LearnPage from "./pages/LearnPage";
 import ModuleDetail from "./pages/ModuleDetail";
 import SignupPage from "./pages/SignupPage";
 import InterviewPage from "./pages/InterviewPage";
+import ContactUs from "./pages/ContactUsPage";
+import ResumeForm from "./pages/ResumePage";
 
 function App() {
   return (
@@ -20,6 +22,7 @@ function App() {
       <Routes>
         <Route path="/" element={<MainDash />} />
         <Route path="/home" element={<HomePage />} />
+        <Route path="/resume" element={<ResumeForm />} />
         <Route path="/projects" element={<ProjectPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage/>} />
@@ -30,6 +33,7 @@ function App() {
         <Route path="/learn" element={<LearnPage />} />
         <Route path="/learn/:moduleName" element={<ModuleDetail />} />
         <Route path="/interview" element={<InterviewPage />} />
+        <Route path="/contact" element={<ContactUs />} />
       </Routes>
       {/* </header>
       </div> */}

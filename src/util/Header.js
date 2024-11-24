@@ -47,7 +47,7 @@ function Header() {
           <Link to="/main" className="linkobj">
             Home
           </Link>
-          <Link to="/projects" className="linkobj">
+          <Link to="/resume" className="linkobj">
             Resume
           </Link>
           <Link to="/dashboard" className="linkobj">
@@ -56,7 +56,7 @@ function Header() {
           <Link to="/interview" className="linkobj">
             Interview
           </Link>
-          <Link to="/" className="linkobj">
+          <Link to="/contact" className="linkobj">
             Contact Us
           </Link>
           {/* Conditional rendering for Login/Logout buttons */}
