@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../stylesheets/SignupPage.css";
-import register from "../services/AuthService"; // Assuming a signup service exists
+import Reg from "../services/AuthService"; // Assuming a signup service exists
 import Cookies from "js-cookie";
 import { Navigate, useNavigate } from "react-router-dom";
 
@@ -18,7 +18,7 @@ function SignupPage() {
   const handleSignup = async (event) => {
     event.preventDefault();
     try {
-      const userData = await register(name, email, phoneNumber, username, password);
+      const userData = await Reg.register(username, password, name, phoneNumber, email);
       console.log("Signup successful:", userData);
       setError("");
 
