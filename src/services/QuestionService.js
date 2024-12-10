@@ -1,10 +1,9 @@
 // src/services/QuestionService.js
 import axiosInstance from "../interceptors/axiosInterceptor";
 
-const API_URL = "http://localhost:8080"; // Replace with your backend URL
+const API_URL = process.env.REACT_APP_server_url; // Replace with your backend URL
 
 const getQuestions = async (level) => {
-  console.log("trying to get");
   try {
     const response = await axiosInstance.get(`${API_URL}/ques/list`, {
       headers: {

@@ -2,10 +2,9 @@
 
 import axiosInstance from "../interceptors/axiosInterceptor";
 
-const API_URL = "http://localhost:8080"; // Replace with your backend URL
+const API_URL = process.env.REACT_APP_server_url; // Replace with your backend URL
 
 const login = async (username, password) => {
-  console.log('trying to log');
   try {
     const response = await axiosInstance.post(`${API_URL}/login/student`, {
       username: username,
