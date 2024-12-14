@@ -1,5 +1,3 @@
-// src/pages/CodeNowPage.js
-
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import QuestionService from "../services/QuestionService";
@@ -11,6 +9,7 @@ const CodeNowPage = () => {
   const [output, setOutput] = useState(''); // State for code output
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [lang, setLang] = useState('c'); // State for selected language
 
   useEffect(() => {
     const fetchQuestion = async () => {
@@ -29,7 +28,7 @@ const CodeNowPage = () => {
 
   const handleRunCode = async () => {
     try {
-      const result = await QuestionService.runCode(id, code); // Send code to backend
+      const result = await QuestionService.runCode(id, code, lang); // Send code to backend
       setOutput(result); // Assuming backend returns { output: "Execution result" }
       console.log(result);
     } catch (error) {
@@ -52,6 +51,20 @@ const CodeNowPage = () => {
       {/* Right side for code editor and output */}
       <div style={{ flex: 1, padding: '20px' }}>
         <h2>Code Editor</h2>
+        
+        {/* Dropdown to select language */}
+        <label htmlFor="langSelect">Select Language: </label>
+        <select
+          id="langSelect"
+          value={lang}
+          onChange={(e) => setLang(e.target.value)}
+          style={{ marginBottom: '10px' }}
+        >
+          <option value="c">C/C++</option>
+          <option value="py">Python</option>
+          <option value="java">Java</option>
+        </select>
+
         <textarea
           value={code}
           onChange={(e) => setCode(e.target.value)}

@@ -32,11 +32,12 @@ const getQuestion = async (id) => {
 };
 
 // New function to submit code for execution
-const runCode = async (id, code) => {
+const runCode = async (id, code, lang) => {
   try {
     const response = await axiosInstance.post(`${API_URL}/code/compile`, {
       id,
       code,
+      lang
     });
     return response.data; // Expecting the backend to return the output/result
   } catch (error) {
