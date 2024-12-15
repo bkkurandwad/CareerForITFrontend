@@ -19,12 +19,12 @@ const login = async (username, password) => {
 
 const register = async (username, password, name, number, mail) => {
   try {
-    const response = await axiosInstance.post(`${API_URL}/reg/student`, {
+    const response = await axiosInstance.post(`${API_URL}/regis/student`, {
       username: username,
       password: password,
       name: name,
-      number: number,
-      mail: mail,
+      phn_no: number,
+      email: mail,
     });
     return response.data; // Assuming the backend returns user data or token
   } catch (error) {

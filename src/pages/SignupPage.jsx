@@ -18,7 +18,7 @@ function SignupPage() {
   const handleSignup = async (event) => {
     event.preventDefault();
     try {
-      const userData = await Auth.register(name, email, phoneNumber, username, password);
+      const userData = await Auth.register(username, password, name, phoneNumber, email);
       console.log("Signup successful:", userData);
       setError("");
 
