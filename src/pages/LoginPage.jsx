@@ -27,6 +27,7 @@ function LoginPage() {
         const reftoken = userData.refreshToken;
         Cookies.set("Token", token, { expires: 1 }); // Expires in 1 day
         Cookies.set("RefreshToken", reftoken, { expires: 3});
+        Cookies.set("username", username);
         // Trigger a redirect to the dashboard
         setRedirect(true);
       } else {

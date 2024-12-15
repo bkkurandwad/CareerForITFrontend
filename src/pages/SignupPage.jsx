@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../stylesheets/SignupPage.css";
-import register from "../services/AuthService"; // Assuming a signup service exists
+import Auth from "../services/AuthService"; // Assuming a signup service exists
 import Cookies from "js-cookie";
 import { Navigate, useNavigate } from "react-router-dom";
 
@@ -18,12 +18,13 @@ function SignupPage() {
   const handleSignup = async (event) => {
     event.preventDefault();
     try {
-      const userData = await register(name, email, phoneNumber, username, password);
+      const userData = await Auth.register(name, email, phoneNumber, username, password);
       console.log("Signup successful:", userData);
       setError("");
 
       // Store the JWT in a cookie (assuming userData contains a token)
       Cookies.set("token", userData.token, { expires: 1 }); // Token expires in 1 day
+      Cookies.set("username", username);
 
       // Redirect to dashboard after successful signup
       setRedirect(true);

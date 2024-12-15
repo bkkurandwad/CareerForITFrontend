@@ -11,9 +11,11 @@ axiosInstance.interceptors.request.use(
   (config) => {
     // Get the token from the cookie
     const token = Cookies.get('Token'); // Assuming 'token' is the cookie name
+    const user_name = Cookies.get('username');
     if (token) {
       // Add token to Authorization header if it exists
       config.headers['Authorization'] = `Bearer ${token}`;
+      config.headers['username'] = user_name;
     }
     return config;
   },
