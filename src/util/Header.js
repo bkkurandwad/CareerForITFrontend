@@ -26,10 +26,10 @@ function Header() {
 
   return (
     <header className="global-header">
-      <div style={{ display: "flex", gap: "10px" }}>
+      <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
         <img src={logo} alt="Organization Logo" style={{ width: "100px" }} />
         <div
-          style={{ display: "flex", justifyContent: "center" }}
+          style={{ display: "flex", justifyContent: "center", flexWrap: "wrap" }}
           className="name"
         >
           <h1 style={{ marginTop: "-30px", marginLeft: "-40px" }}>
@@ -42,6 +42,7 @@ function Header() {
             gap: "25px",
             alignItems: "center",
             marginTop: "-10px",
+            flexWrap: "wrap"
           }}
         >
           <Link to="/main" className="linkobj">

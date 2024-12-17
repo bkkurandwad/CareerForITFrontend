@@ -10,6 +10,7 @@ const CodeNowPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [lang, setLang] = useState('c'); // State for selected language
+  const [submissions, setSubmissions] = useState([]);
 
   useEffect(() => {
     const fetchQuestion = async () => {
@@ -23,6 +24,21 @@ const CodeNowPage = () => {
       }
     };
 
+    const fetchSubmission = async () => {
+      try {
+        const data = await QuestionService.showCode(id);
+        console.log(data);
+        if(data){
+          setSubmissions(data);
+        }
+      } catch (error) {
+        setError("Failed to load submissions");
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchSubmission();
     fetchQuestion();
   }, [id]);
 
@@ -43,10 +59,24 @@ const CodeNowPage = () => {
     <div style={{ display: 'flex', height: '100vh' }}>
       {/* Left side for question */}
       <div style={{ flex: 1, padding: '20px', borderRight: '1px solid #ddd' }}>
-        <h1>Question: {question.fullQuestion}</h1>
-        <p>Difficulty: {question.difficulty}</p>
-        <p>{question.description}</p>
-      </div>
+  <h1>Question: {question.fullQuestion}</h1>
+  <p>Difficulty: {question.difficulty}</p>
+  <p>{question.description}</p>
+  <h1>
+    Previous submissions
+  </h1>
+  {submissions.map((element, index) => (
+    <div 
+      key={index} 
+      style={{ display: 'flex', gap: '20px', flexWrap: 'wrap', borderBottom: '1px solid #ddd', padding: '10px 0' }}
+    >
+      
+      <h3> {element.lang}</h3>
+      <h3> {element.code}</h3>
+      <h3> {element.result || "No Result"}</h3>
+    </div>
+  ))}
+</div>
 
       {/* Right side for code editor and output */}
       <div style={{ flex: 1, padding: '20px' }}>
