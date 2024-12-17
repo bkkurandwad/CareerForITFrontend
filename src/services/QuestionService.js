@@ -46,4 +46,32 @@ const runCode = async (id, code, lang) => {
   }
 };
 
-export default { getQuestions, getQuestion, runCode };
+const submitCode = async (id, code, lang, result) => {
+  try {
+    const response = await axiosInstance.post(`${API_URL}/code/submit`, {
+      quesid: id,
+      code,
+      lang,
+      result
+    });
+    return response.data; // Expecting the backend to return the output/result
+  } catch (error) {
+    console.error("Failed to submit code", error);
+    throw error;
+  }
+  }
+
+  const showCode = async (id) => {
+    try {
+      const response = await axiosInstance.post(`${API_URL}/code/show`, {
+        quesid: id
+      });
+      return response.data; // Expecting the backend to return the output/result
+    } catch (error) {
+      console.error("Failed to submit code", error);
+      throw error;
+    }
+    }
+
+
+export default { getQuestions, getQuestion, runCode, submitCode, showCode };
