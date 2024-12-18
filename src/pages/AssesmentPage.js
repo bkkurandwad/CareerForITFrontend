@@ -1,92 +1,40 @@
-import React, { useState } from "react";
-import "../stylesheets/AssessmentPage.css";
+import React, { useEffect, useState } from "react";
+import AssesService from "../services/AssesmentService";
+import "../stylesheets/AssesmentPage.css";
 
-const AssessmentPage = () => {
-  const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [answers, setAnswers] = useState(Array(10).fill(null)); // Example with 10 questions
+const AssesmentPage = () => {
+  const [assignments, setAssignments] = useState([]);
 
-  const questions = [
-    { question: "What is 2 + 2?", options: ["3", "4", "5"], correct: 1 },
-    { question: "What is the capital of France?", options: ["Berlin", "Paris", "Rome"], correct: 1 },
-    // Add more questions here
-  ];
+  useEffect(() => {
+    // Fetch assignments data from the service
+    const fetchAssignments = async () => {
+      try {
+        const response = await AssesService.getAssesments();
+          setAssignments(response);
+      } catch (error) {
+        console.error("Error fetching assignments:", error);
+      }
+    };
 
-  // Handle option selection
-  const handleOptionChange = (index) => {
-    const updatedAnswers = [...answers];
-    updatedAnswers[currentQuestion] = index; // Save selected answer
-    setAnswers(updatedAnswers);
-  };
-
-  // Deselect the selected answer
-  const handleDeselect = () => {
-    const updatedAnswers = [...answers];
-    updatedAnswers[currentQuestion] = null; // Remove the answer for the current question
-    setAnswers(updatedAnswers);
-  };
-
-  // Go to the next question
-  const handleNext = () => {
-    if (currentQuestion < questions.length - 1) {
-      setCurrentQuestion(currentQuestion + 1);
-    }
-  };
-
-  // Handle submission
-  const handleSubmit = () => {
-    console.log("Submitted Answers:", answers);
-    alert("Assessment Submitted!");
-    // Submit the answers to the backend or calculate results
-  };
+    fetchAssignments();
+  }, []);
 
   return (
     <div className="assessment-container">
-      {/* Sidebar with question navigation */}
-      <div className="sidebar">
-        {questions.map((_, index) => (
-          <div
-            key={index}
-            className={`question-box ${answers[index] !== null ? "attempted" : ""}`}
-            onClick={() => setCurrentQuestion(index)}
-          >
-            {index + 1}
+      {assignments.length > 0 ? (
+        assignments.map((assignment) => (
+          <div key={assignment.id} className="card">
+            <h3 className="card-title">{assignment.name}</h3>
+            <p className="card-desc">{assignment.desc}</p>
+            <p className="card-questions">Total Questions: {assignment.totalQues}</p>
+            <button className="start-button">Start</button>
           </div>
-        ))}
-      </div>
-
-      {/* Main Content (Card centered with question) */}
-      <div className="card-container">
-        <div className="question-area">
-          <h2>Question {currentQuestion + 1}</h2>
-          <p>{questions[currentQuestion].question}</p>
-          <form>
-            {questions[currentQuestion].options.map((option, index) => (
-              <div key={index}>
-                <label>
-                  <input
-                    type="radio"
-                    name="option"
-                    value={index}
-                    checked={answers[currentQuestion] === index}
-                    onChange={() => handleOptionChange(index)}
-                  />
-                  {option}
-                </label>
-              </div>
-            ))}
-          </form>
-          <button onClick={handleDeselect} disabled={answers[currentQuestion] === null}>
-            Deselect
-          </button>
-          {currentQuestion < questions.length - 1 ? (
-            <button onClick={handleNext}>Next Question</button>
-          ) : (
-            <button onClick={handleSubmit}>Submit</button>
-          )}
-        </div>
-      </div>
+        ))
+      ) : (
+        <p>No assignments available</p>
+      )}
     </div>
   );
 };
 
-export default AssessmentPage;
+export default AssesmentPage;
