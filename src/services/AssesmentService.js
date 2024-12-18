@@ -1,8 +1,6 @@
 import axiosInstance from "../interceptors/axiosInterceptor";
 
-//const API_URL = process.env.REACT_APP_server_url; // Replace with your backend URL
-
-const API_URL = "http://localhost:8080"
+const API_URL = process.env.REACT_APP_server_url; // Replace with your backend URL
 
 const getAssesments = async () => {
   try {
