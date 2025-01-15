@@ -12,4 +12,16 @@ const getAssesments = async () => {
   }
 };
 
-export default { getAssesments };
+const getQuestionsByAssessmentId = async (assignId) => {
+  try {
+    const response = await axiosInstance.post(`${API_URL}/assesment/questions`, {
+      assignID: assignId // Sending the assignId in the request body
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Failed to fetch questions for assignment", error);
+    throw error;
+  }
+};
+
+export default { getAssesments, getQuestionsByAssessmentId };

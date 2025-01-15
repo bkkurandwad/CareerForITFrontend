@@ -13,6 +13,16 @@ const CodeNowPage = () => {
   const [submissions, setSubmissions] = useState([]);
 
   useEffect(() => {
+    // Set default "Hello World" code based on the selected language
+    const defaultCode = {
+      c: `#include <stdio.h>\nint main() {\n    printf("Hello, World!\\n");\n    return 0;\n}`,
+      py: `print("Hello, World!")`,
+      java: `public class Main {\n    public static void main(String[] args) {\n        System.out.println("Hello, World!");\n    }\n}`
+    };
+    setCode(defaultCode[lang]);
+  }, [lang]);
+
+  useEffect(() => {
     const fetchQuestion = async () => {
       try {
         const data = await QuestionService.getQuestion(id);
@@ -62,9 +72,9 @@ const CodeNowPage = () => {
   <h1>Question: {question.fullQuestion}</h1>
   <p>Difficulty: {question.difficulty}</p>
   <p>{question.description}</p>
-  <h1>
+  {/* <h1>
     Previous submissions
-  </h1>
+  </h1> */}
   {submissions.map((element, index) => (
     <div 
       key={index} 

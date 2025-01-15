@@ -3,7 +3,7 @@ import Cookies from 'js-cookie';
 
 // Create an axios instance
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:8080', // Replace with your API base URL
+  baseURL: process.env.REACT_APP_server_url, // Replace with your API base URL
 });
 
 // Add a request interceptor to include JWT token in headers

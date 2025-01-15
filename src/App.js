@@ -14,6 +14,8 @@ import SignupPage from "./pages/SignupPage";
 import InterviewPage from "./pages/InterviewPage";
 import ContactUs from "./pages/ContactUsPage";
 import ResumeForm from "./pages/ResumePage";
+import MockPage from "./pages/mock";
+import AssessmentTestPage from "./pages/AssesmentTestPage";
 
 function App() {
   return (
@@ -21,22 +23,22 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<MainDash />} />
+        <Route path="/mock" element={<MockPage />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/resume" element={<ResumeForm />} />
         <Route path="/projects" element={<ProjectPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/signup" element={<SignupPage/>} />
+        <Route path="/signup" element={<SignupPage />} />
         <Route path="/dashboard" element={<CodeDashboardPage />} />
         <Route path="/codenow/:id" element={<CodeNowPage />} />
         <Route path="/assesment" element={<AssessmentPage />} />
         <Route path="/main" element={<MainDash />} />
         <Route path="/learn" element={<LearnPage />} />
         <Route path="/learn/:moduleName" element={<ModuleDetail />} />
-        <Route path="/interview" element={<InterviewPage />} />
+        <Route path="/interview" element={<MockPage />} />
         <Route path="/contact" element={<ContactUs />} />
+        <Route path="/assessment-test/:assignId" element={<AssessmentTestPage />} />
       </Routes>
-      {/* </header>
-      </div> */}
     </Router>
   );
 }

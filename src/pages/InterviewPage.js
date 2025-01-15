@@ -8,7 +8,6 @@ const InterviewPage = () => {
   const [responses, setResponses] = useState([]);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [isUserSpeaking, setIsUserSpeaking] = useState(false);
-  const [mouthScale, setMouthScale] = useState(1);
   const videoRef = useRef(null);
   const streamRef = useRef(null);
   const recognitionRef = useRef(null);
