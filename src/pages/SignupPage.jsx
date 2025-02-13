@@ -25,6 +25,7 @@ function SignupPage() {
       // Store the JWT in a cookie (assuming userData contains a token)
       Cookies.set("token", userData.token, { expires: 1 }); // Token expires in 1 day
       Cookies.set("username", username);
+      Cookies.set("usermail", email);
 
       // Redirect to dashboard after successful signup
       setRedirect(true);
