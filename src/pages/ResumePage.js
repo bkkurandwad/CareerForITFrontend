@@ -4,8 +4,27 @@ import "../stylesheets/ResumeForm.css";
 import Cookies from "js-cookie";
 import { useEffect } from "react";
 
+// const ResumeForm = () => {
+//     const usermail = Cookies.get("usermail");
+//     const resume_url = process.env.REACT_APP_RESUME_URL;
+//     console.log(usermail);
+
+//     return (
+//         <div style={{ marginTop: "0px" }}>
+//             <iframe
+//                 src={`${resume_url}/dashboard/${usermail}`}
+//                 style={{
+//                     width: "100%",
+//                     height: "100vh",
+//                     border: "none" // Optional, to remove iframe borders
+//                 }}
+//             />
+//         </div>
+//     );
+// };
+
 const ResumeForm = () => {
-   const usermail = Cookies.get("usermail");
+   const usermail = Cookies.get("username");
    const resume_url = process.env.REACT_APP_RESUME_URL;
   
       useEffect(() => {
